@@ -1,4 +1,4 @@
-FROM fedora:31
+FROM fedora:31 AS buildmonkey
 MAINTAINER stroopkoek/stroopwafel
 
 ENV DEBIAN_FRONTEND noninteractive
@@ -17,6 +17,13 @@ RUN wget -O - https://static.tp-link.com/2020/202001/20200116/Omada_Controller_v
 WORKDIR /tmp/b/c
 
 RUN chmod +x ./install.sh && yes | ./install.sh && rm -rf /tmp/b && \
-    rm /opt/tplink/EAPController/data/db/journal/prealloc.1 \
-    /opt/tplink/EAPController/data/db/journal/prealloc.2 \
-    /opt/tplink/EAPController/data/db/journal/j._0
+   rm -f /opt/tplink/EAPController/data/db/journal/prealloc.1 \
+         /opt/tplink/EAPController/data/db/journal/prealloc.2 \
+         /opt/tplink/EAPController/data/db/journal/j._0
+
+
+FROM registry.fedoraproject.org/fedora-minimal:31
+RUN microdnf -y update && microdnf -y install curl net-tools jsvc procps && microdnf clean all && rm -rf /var/cache/yum /usr/share/doc /usr/share/icons
+WORKDIR /opt
+RUN mkdir -p /opt/tplink
+COPY --from=buildmonkey /opt/tplink /opt/tplink
