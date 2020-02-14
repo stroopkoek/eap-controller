@@ -1,17 +1,18 @@
 name: Docker Image CI
 
 on:
-  push:
-    branches: 
-      - master
+  release:
+          types: [published] 
 
 jobs:
 
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
+    - name: Login to DockerHub Registry
+      run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+      run: docker build . --file Dockerfile --tag stroopwafel/eap-controller:latest
+    - name: Push the Docker image
+      run: docker push stroopwafel/eap-controller:latest
