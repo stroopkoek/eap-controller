@@ -18,17 +18,5 @@ else
 fi
 
 #starting tpeap service
-tpeap start
+/opt/tplink/EAPController/bin/control.sh start
 EOF
-
-cat <<-'EOF' > /etc/systemd/system/stroopstart.service
-[Unit]
-Description=Stroopwafel's EAPController start service
-Type=simple
-ExecStart=/opt/tplink/stroopwafel/stroopstart.sh
-
-[Install]
-WantedBy=multi-user.target
-EOF
-
-systemctl enable stroopstart
