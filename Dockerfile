@@ -29,7 +29,9 @@ RUN cp /opt/tplink/EAPController/install.sh /opt/tplink/install.sh
 
 #real build
 FROM ubuntu:bionic
-RUN apt -y update && apt -y install curl net-tools jsvc procps libcap2 libcap2-bin && \
+RUN apt -y update && \
+    apt -y install curl net-tools jsvc procps libcap2 libcap2-bin && \
+    apt -y upgrade && \
     apt clean all && \
     rm -rf /var/cache/apt /var/lib/apt/lists /usr/share/doc
 
