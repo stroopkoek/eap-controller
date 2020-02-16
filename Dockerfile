@@ -1,10 +1,10 @@
-FROM centos:8 AS buildmonkey
+FROM ubuntu:bionic AS buildmonkey
 MAINTAINER stroopkoek/stroopwafel
 
 ENV DEBIAN_FRONTEND noninteractive
 
 #update and install required packages
-RUN yum -y update && yum -y install wget curl net-tools jsvc chkconfig procps
+RUN apt -y update && apt -y install wget curl net-tools jsvc procps
 
 
 #Prepare tmp directory
@@ -28,10 +28,12 @@ RUN cp /opt/tplink/EAPController/install.sh /opt/tplink/install.sh
 
 
 #real build
-FROM centos:8
-RUN yum -y update && yum -y install curl net-tools jsvc procps && \
-    yum clean all && \
-    rm -rf /var/cache/yum
+FROM ubuntu:bionic
+RUN apt -y update && \
+    apt -y install curl net-tools jsvc procps libcap2 libcap2-bin && \
+    apt -y upgrade && \
+    apt clean all && \
+    rm -rf /var/cache/apt /var/lib/apt/lists /usr/share/doc
 
 #create /opt/tplink directory + for the config that resides on disk
 RUN mkdir -p /opt/tplink \
@@ -44,5 +46,7 @@ RUN mkdir -p /opt/tplink \
 
 COPY --from=buildmonkey /opt/tplink /opt/tplink
 
-RUN chmod +x /opt/tplink/stroopwafel/install.sh && /opt/tplink/stroopwafel/install.sh
-# && rm /opt/tplink/stroopwafel/install.sh
+RUN chmod +x /opt/tplink/stroopwafel/install.sh && /opt/tplink/stroopwafel/install.sh && rm /opt/tplink/stroopwafel/install.sh
+
+ENTRYPOINT ["/opt/tplink/stroopwafel/stroopstart.sh"]
+HEALTHCHECK CMD curl -k --fail https://localhost:8043/login || exit 1

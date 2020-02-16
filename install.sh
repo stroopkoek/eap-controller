@@ -14,21 +14,18 @@ if [ -f /current_config/bin/control.sh ]; then
   ln -fs /current_config/properties $targetdirectory
   ln -fs /current_config/work $targetdirectory
 else
-  echo "Configuring new files"
+  echo "Configuring new files; exporting them to volume"
+  ln -fs ${targetdirectory}/bin /current_config
+  ln -fs ${targetdirectory}/data /current_config
+  ln -fs ${targetdirectory}/keystore /current_config
+  ln -fs ${targetdirectory}/logs /current_config
+  ln -fs ${targetdirectory}/properties /current_config
+  ln -fs ${targetdirectory}/work /current_config
 fi
 
 #starting tpeap service
-tpeap start
+/opt/tplink/EAPController/bin/control.sh start
+tail -f /dev/null
 EOF
 
-cat <<-'EOF' > /etc/systemd/system/stroopstart.service
-[Unit]
-Description=Stroopwafel's EAPController start service
-Type=simple
-ExecStart=/opt/tplink/stroopwafel/stroopstart.sh
-
-[Install]
-WantedBy=multi-user.target
-EOF
-
-systemctl enable stroopstart
+chmod +x /opt/tplink/stroopwafel/stroopstart.sh
