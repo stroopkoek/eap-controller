@@ -20,3 +20,5 @@ fi
 #starting tpeap service
 /opt/tplink/EAPController/bin/control.sh start
 EOF
+
+chmod +x /opt/tplink/stroopwafel/stroopstart.sh
