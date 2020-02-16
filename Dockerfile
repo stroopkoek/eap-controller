@@ -1,4 +1,4 @@
-FROM centos:7 AS buildmonkey
+FROM centos:8 AS buildmonkey
 MAINTAINER stroopkoek/stroopwafel
 
 ENV DEBIAN_FRONTEND noninteractive
@@ -28,7 +28,7 @@ RUN cp /opt/tplink/EAPController/install.sh /opt/tplink/install.sh
 
 
 #real build
-FROM centos:7
+FROM centos:8
 RUN yum -y update && yum -y install curl net-tools jsvc procps && \
     yum clean all && \
     rm -rf /var/cache/yum
