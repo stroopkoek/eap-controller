@@ -29,7 +29,7 @@ RUN cp /opt/tplink/EAPController/install.sh /opt/tplink/install.sh
 
 #real build
 FROM ubuntu:bionic
-RUN apt -y update && apt -y install curl net-tools jsvc procps && \
+RUN apt -y update && apt -y install curl net-tools jsvc procps libcap2 libcap2-bin && \
     apt clean all && \
     rm -rf /var/cache/apt /var/lib/apt/lists /usr/share/doc
 
@@ -47,4 +47,4 @@ COPY --from=buildmonkey /opt/tplink /opt/tplink
 RUN chmod +x /opt/tplink/stroopwafel/install.sh && /opt/tplink/stroopwafel/install.sh && rm /opt/tplink/stroopwafel/install.sh
 
 ENTRYPOINT ["/opt/tplink/stroopwafel/stroopstart.sh"]
-HEALTHCHECK CMD curl -k --fail http://localhost:8043/login || exit 1
+HEALTHCHECK CMD curl -k --fail https://localhost:8043/login || exit 1
