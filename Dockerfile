@@ -47,3 +47,4 @@ COPY --from=buildmonkey /opt/tplink /opt/tplink
 RUN chmod +x /opt/tplink/stroopwafel/install.sh && /opt/tplink/stroopwafel/install.sh && rm /opt/tplink/stroopwafel/install.sh
 
 ENTRYPOINT ["/opt/tplink/stroopwafel/stroopstart.sh" && tail -f /dev/null]
+HEALTHCHECK CMD curl -k --fail http://localhost:8043/login || exit 1
