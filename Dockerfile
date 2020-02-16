@@ -44,4 +44,5 @@ RUN mkdir -p /opt/tplink \
 
 COPY --from=buildmonkey /opt/tplink /opt/tplink
 
-RUN chmod +x /opt/tplink/stroopwafel/install.sh && /opt/tplink/stroopwafel/install.sh && rm /opt/tplink/stroopwafel/install.sh
+RUN chmod +x /opt/tplink/stroopwafel/install.sh && /opt/tplink/stroopwafel/install.sh
+# && rm /opt/tplink/stroopwafel/install.sh
