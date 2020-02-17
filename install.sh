@@ -4,11 +4,14 @@ cat <<-'EOF' > /opt/tplink/stroopwafel/docker_entrypoint.sh
 #declaring variables
 targetdirectory=/opt/tplink/EAPController
 
-#look if configuration exists on disk: 
+#look if configuration exists on disk:
 #if there is; import them by linking them
 #else; link the base files to the current_config
 if [ -f /current_config/bin/control.sh ]; then
   echo "Found existing files; importing them to disk."
+  rm -rf ${targetdirectory}/bin ${targetdirectory}/data \
+         ${targetdirectory}/keystore ${targetdirectory}/logs \
+         ${targetdirectory}/properties ${targetdirectory}/work
   ln -fs /current_config/bin $targetdirectory
   ln -fs /current_config/data $targetdirectory
   ln -fs /current_config/keystore $targetdirectory
