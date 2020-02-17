@@ -7,7 +7,7 @@ targetdirectory=/opt/tplink/EAPController
 #if /current_config/bin/control.sh doesn't exist then
 #remove the current_config just in case and move the system folders to current_config
 #else echo for logging purposes that existing files are found!
-if ![ -f /current_config/bin/control.sh ]; then
+if ! [ -f /current_config/bin/control.sh ]; then
   #remove current_config just in case; move the system folders to current_config
   #so that the link will work
 
