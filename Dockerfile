@@ -4,7 +4,7 @@ MAINTAINER stroopkoek/stroopwafel
 ENV DEBIAN_FRONTEND noninteractive
 
 #update and install required packages
-RUN apt -y update && apt -y install wget curl net-tools jsvc procps
+RUN apt -y update && apt -y install wget curl net-tools jsvc procps libcap2 libcap2-bin
 
 
 #Prepare tmp directory
@@ -20,7 +20,8 @@ RUN wget -O - https://static.tp-link.com/2020/202001/20200116/Omada_Controller_v
 WORKDIR /tmp/b/c
 
 RUN chmod +x ./install.sh && yes | ./install.sh && rm -rf /tmp/b && \
-   rm -f /opt/tplink/EAPController/data/db/journal/prealloc.1 \
+   rm -f /opt/tplink/EAPController/data/db/journal/prealloc.0 \
+         /opt/tplink/EAPController/data/db/journal/prealloc.1 \
          /opt/tplink/EAPController/data/db/journal/prealloc.2 \
          /opt/tplink/EAPController/data/db/journal/j._0
 
