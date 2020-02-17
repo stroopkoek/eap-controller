@@ -20,9 +20,13 @@ if ! [ -f /current_config/properties/eap.properties ]; then
   mv ${targetdirectory}/work /current_config/work
 
 else
-  #nothing to do except symlinking in next block
+  #remove files from system folder.
   echo "Found existing files; importing them to disk."
-
+  rm -rf ${targetdirectory}/data \
+         ${targetdirectory}/keystore \
+         ${targetdirectory}/logs \
+         ${targetdirectory}/properties \
+         ${targetdirectory}/work
 fi
 
 #symlink it to the EAP folder.
