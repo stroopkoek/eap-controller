@@ -1,5 +1,5 @@
 ## chmodding aswell to tpeap
-cat <<-'EOF' > /opt/tplink/stroopwafel/stroopstart.sh
+cat <<-'EOF' > /opt/tplink/stroopwafel/docker_entrypoint.sh
 #!/bin/bash
 #declaring variables
 targetdirectory=/opt/tplink/EAPController
@@ -28,4 +28,4 @@ fi
 tail -f /dev/null
 EOF
 
-chmod +x /opt/tplink/stroopwafel/stroopstart.sh
+chmod +x /opt/tplink/stroopwafel/docker_entrypoint.sh

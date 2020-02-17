@@ -24,9 +24,6 @@ RUN chmod +x ./install.sh && yes | ./install.sh && rm -rf /tmp/b && \
          /opt/tplink/EAPController/data/db/journal/prealloc.2 \
          /opt/tplink/EAPController/data/db/journal/j._0
 
-RUN cp /opt/tplink/EAPController/install.sh /opt/tplink/install.sh
-
-
 #real build
 FROM ubuntu:bionic
 RUN apt -y update && \
@@ -48,5 +45,5 @@ COPY --from=buildmonkey /opt/tplink /opt/tplink
 
 RUN chmod +x /opt/tplink/stroopwafel/install.sh && /opt/tplink/stroopwafel/install.sh && rm /opt/tplink/stroopwafel/install.sh
 
-ENTRYPOINT ["/opt/tplink/stroopwafel/stroopstart.sh"]
+ENTRYPOINT ["/opt/tplink/stroopwafel/docker_entrypoint.sh"]
 HEALTHCHECK CMD curl -k --fail https://localhost:8043/login || exit 1
