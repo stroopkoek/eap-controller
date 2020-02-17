@@ -13,7 +13,6 @@ if ! [ -f /current_config/bin/control.sh ]; then
 
   echo "Configuring new files; exporting them to volume"
   rm -rf /current_config/*
-  mv ${targetdirectory}/bin /current_config/bin
   mv ${targetdirectory}/data /current_config/data
   mv ${targetdirectory}/keystore /current_config/keystore
   mv ${targetdirectory}/logs /current_config/logs
@@ -27,7 +26,6 @@ else
 fi
 
 #symlink it to the EAP folder.
-ln -fs /current_config/bin $targetdirectory
 ln -fs /current_config/data $targetdirectory
 ln -fs /current_config/keystore $targetdirectory
 ln -fs /current_config/logs $targetdirectory
