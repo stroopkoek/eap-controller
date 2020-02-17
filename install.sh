@@ -15,12 +15,12 @@ if [ -f /current_config/bin/control.sh ]; then
   ln -fs /current_config/work $targetdirectory
 else
   echo "Configuring new files; exporting them to volume"
-  ln -fs ${targetdirectory}/bin /current_config
-  ln -fs ${targetdirectory}/data /current_config
-  ln -fs ${targetdirectory}/keystore /current_config
-  ln -fs ${targetdirectory}/logs /current_config
-  ln -fs ${targetdirectory}/properties /current_config
-  ln -fs ${targetdirectory}/work /current_config
+  ln -fs ${targetdirectory}/bin /current_config/bin
+  ln -fs ${targetdirectory}/data /current_config/data
+  ln -fs ${targetdirectory}/keystore /current_config/keystore
+  ln -fs ${targetdirectory}/logs /current_config/logs
+  ln -fs ${targetdirectory}/properties /current_config/properties
+  ln -fs ${targetdirectory}/work /current_config/work
 fi
 
 #starting tpeap service
