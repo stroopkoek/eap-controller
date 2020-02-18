@@ -1,3 +1,6 @@
+![Docker Pulls](https://img.shields.io/docker/pulls/stroopwafel/eap-controller?style=for-the-badge)
+![Docker Stars](https://img.shields.io/docker/stars/stroopwafel/eap-controller?style=for-the-badge)
+![GitHub issues](https://img.shields.io/github/issues/stroopkoek/eap-controller?style=for-the-badge)
 # eap-controller
 ## Supported Architecture & Tags
 
@@ -16,13 +19,33 @@ useradd -u -M -r -s /bin/false tplink
 usermod -L tplink
 ```
 ### Docker compose
-
-
+Also available as file in the repository.
+```
+---
+version: "3"
+services:
+  eap:
+    image: stroopwafel/eap-controller:latest
+    container_name: eapcontroller
+    volumes:
+      - /path/to/your/folder:/current_config
+    ports:
+      - 8088:8088
+      - 8043:8043
+      - 27001:27001/udp
+      - 27002:27002
+      - 29810:29810/udp
+      - 29811:29811
+      - 29812:29812
+      - 29813:29813
+    restart: unless-stopped
+```
 ### Docker run
 ```
 docker run -p 8088:8088 -p 8043:8043 -p 27001:27001/udp \
 -p 27002:27002 -p 29810:29810/udp -p 29811:29811 -p 29812:29812 \
 -p 29813:29813 -v /path/to/your/config:/current_config \
+--name=eapcontroller \
 -d stroopwafel/eap-controller:1.0
 ```
 
