@@ -6,12 +6,10 @@ ENV DEBIAN_FRONTEND noninteractive
 #update and install required packages
 RUN apt -y update && apt -y install wget curl net-tools jsvc procps libcap2 libcap2-bin
 
-
 #Prepare tmp directory
 RUN mkdir -p /tmp/b/c \
              /opt/tplink/stroopwafel
 
-COPY ./install.sh /opt/tplink/stroopwafel
 WORKDIR /tmp/b
 
 RUN wget -O - https://static.tp-link.com/2020/202001/20200116/Omada_Controller_v3.2.6_linux_x64.tar.gz > c.tar.gz && tar -zxf c.tar.gz -C ./c --strip-components=1 && \
@@ -24,6 +22,13 @@ RUN chmod +x ./install.sh && yes | ./install.sh && rm -rf /tmp/b && \
          /opt/tplink/EAPController/data/db/journal/prealloc.1 \
          /opt/tplink/EAPController/data/db/journal/prealloc.2 \
          /opt/tplink/EAPController/data/db/journal/j._0
+
+#copyjob of two scripts
+#install.sh makes the docker_entrypoint script
+#control.sh removes the original and replaces it with this prepared one
+COPY ./script/install.sh /opt/tplink/stroopwafel
+COPY ./script/control.sh /opt/tplink/
+
 
 #real build
 FROM ubuntu:bionic
