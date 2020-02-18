@@ -1,13 +1,11 @@
-FROM ubuntu:bionic AS buildmonkey
+FROM ubuntu:bionic AS builder
 MAINTAINER stroopkoek/stroopwafel
 
 ENV DEBIAN_FRONTEND noninteractive
 
 #update and install required packages
-RUN apt -y update && apt -y install wget curl net-tools jsvc procps libcap2 libcap2-bin
-
-#Prepare tmp directory
-RUN mkdir -p /tmp/b/c \
+RUN apt -y update && apt -y install wget curl net-tools jsvc procps libcap2 libcap2-bin && \
+    mkdir -p /tmp/b/c \
              /opt/tplink/stroopwafel
 
 WORKDIR /tmp/b
@@ -26,7 +24,7 @@ RUN chmod +x ./install.sh && yes | ./install.sh && rm -rf /tmp/b && \
    sed -i 's/-root/-tplink/' /opt/tplink/EAPController/bin/control.sh && \
    sed -i -e '/()/! s/check_root_perms/#check_root_perms/;' /opt/tplink/EAPController/bin/control.sh && \
    sed -i 's#/var/run/${NAME}.pid#/var/run/tplink/${NAME}.pid#' /opt/tplink/EAPController/bin/control.sh && \
-   echo wait >> /opt/tplink/EAPController/bin/control.sh
+   echo tail -f /dev/null >> /opt/tplink/EAPController/bin/control.sh
 
 COPY ./script/install.sh /opt/tplink/stroopwafel
 
@@ -36,10 +34,9 @@ RUN apt -y update && \
     apt -y install curl net-tools jsvc procps libcap2 libcap2-bin && \
     apt -y upgrade && \
     apt clean all && \
-    rm -rf /var/cache/apt /var/lib/apt/lists /usr/share/doc
-
-#create /opt/tplink directory + for the config that resides on disk
-RUN mkdir -p /opt/tplink \
+    rm -rf /var/cache/apt /var/lib/apt/lists /usr/share/doc && \
+    #create /opt/tplink directory + for the config that resides on disk
+    mkdir -p /opt/tplink \
              /current_config/bin \
              /current_config/data \
              /current_config/keystore \
@@ -47,7 +44,7 @@ RUN mkdir -p /opt/tplink \
              /current_config/properties \
              /current_config/work
 
-COPY --from=buildmonkey /opt/tplink /opt/tplink
+COPY --from=builder /opt/tplink /opt/tplink
 
 RUN chmod +x /opt/tplink/stroopwafel/install.sh && /opt/tplink/stroopwafel/install.sh && rm /opt/tplink/stroopwafel/install.sh && \
     useradd -U -d /opt/tplink tplink
