@@ -25,7 +25,8 @@ RUN chmod +x ./install.sh && yes | ./install.sh && rm -rf /tmp/b && \
    #prepare control.sh for rootless access
    sed -i 's/-root/-tplink/' /opt/tplink/EAPController/bin/control.sh && \
    sed -i -e '/()/! s/check_root_perms/#check_root_perms/;' /opt/tplink/EAPController/bin/control.sh && \
-   sed -i 's#/var/run/${NAME}.pid#/var/run/tplink/${NAME}.pid#' /opt/tplink/EAPController/bin/control.sh
+   sed -i 's#/var/run/${NAME}.pid#/var/run/tplink/${NAME}.pid#' /opt/tplink/EAPController/bin/control.sh && \
+   echo wait >> /opt/tplink/EAPController/bin/control.sh
 
 COPY ./script/install.sh /opt/tplink/stroopwafel
 
