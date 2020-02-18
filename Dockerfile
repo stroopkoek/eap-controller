@@ -27,7 +27,7 @@ RUN chmod +x ./install.sh && yes | ./install.sh && rm -rf /tmp/b && \
 #install.sh makes the docker_entrypoint script
 #control.sh removes the original and replaces it with this prepared one
 COPY ./script/install.sh /opt/tplink/stroopwafel
-COPY ./script/control.sh /opt/tplink/
+COPY ./script/control.sh /opt/tplink/EAPController/bin
 
 
 #real build
