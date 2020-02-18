@@ -28,7 +28,8 @@ else
          ${targetdirectory}/properties \
          ${targetdirectory}/work
 fi
-chown -R tplink:tplink /var/run/tplink/
+mkdir -p /var/run/tplink
+chown -R tplink:tplink /var/run/tplink
 chown -R tplink:tplink /current_config
 chown -R tplink:tplink $targetdirectory
 chmod -R 775 /current_config
@@ -42,5 +43,5 @@ ln -fs /current_config/properties $targetdirectory
 ln -fs /current_config/work $targetdirectory
 
 #run CMD of Dockerfile
-exec runuser -u tplink "$@"
+exec runuser -u tplink "$@" start
 EOF
