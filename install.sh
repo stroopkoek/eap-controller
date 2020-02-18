@@ -44,4 +44,4 @@ tail -f /dev/null
 EOF
 
 chmod 777 /opt/tplink/stroopwafel/docker_entrypoint.sh
-chmod -R 750 /opt/tplink/EAPController
+chmod -R 757 /opt/tplink/EAPController
