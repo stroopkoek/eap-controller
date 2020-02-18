@@ -4,6 +4,7 @@ cat <<-'EOF' > /opt/tplink/stroopwafel/docker_entrypoint.sh
 #declaring variables
 targetdirectory=/opt/tplink/EAPController
 chmod -R 750 ${targetdirectory}
+chmod -R 750 /current_config
 
 #if /current_config/bin/control.sh doesn't exist then
 #remove the current_config just in case and move the system folders to current_config
