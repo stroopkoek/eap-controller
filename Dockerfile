@@ -46,7 +46,7 @@ COPY --from=buildmonkey /opt/tplink /opt/tplink
 
 RUN chmod +x /opt/tplink/stroopwafel/install.sh && /opt/tplink/stroopwafel/install.sh && rm /opt/tplink/stroopwafel/install.sh
 
-VOLUME /current_config
-EXPOSE 8088 8043 27001/udp 27002 29810/udp 29811 29812 29813 
-ENTRYPOINT ["/opt/tplink/stroopwafel/docker_entrypoint.sh"]
+EXPOSE 8088 8043 27001/udp 27002 29810/udp 29811 29812 29813
+ENTRYPOINT ["/bin/bash", "/opt/tplink/stroopwafel/docker_entrypoint.sh"]
+CMD ["/opt/tplink/EAPController/bin/control.sh"]
 HEALTHCHECK CMD curl -k --fail https://localhost:8043/login || exit 1

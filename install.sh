@@ -3,8 +3,6 @@ cat <<-'EOF' > /opt/tplink/stroopwafel/docker_entrypoint.sh
 #!/bin/bash
 #declaring variables
 targetdirectory=/opt/tplink/EAPController
-chmod -R 750 ${targetdirectory}
-chmod -R 750 /current_config
 
 #if /current_config/bin/control.sh doesn't exist then
 #remove the current_config just in case and move the system folders to current_config
@@ -31,6 +29,11 @@ else
          ${targetdirectory}/work
 fi
 
+chown -R tplink:tplink /current_config
+chown -R tplink:tplink $targetdirectory
+chmod -R 775 /current_config
+chmod -R 775 $targetdirectory
+
 #symlink it to the EAP folder.
 ln -fs /current_config/data $targetdirectory
 ln -fs /current_config/keystore $targetdirectory
@@ -38,11 +41,5 @@ ln -fs /current_config/logs $targetdirectory
 ln -fs /current_config/properties $targetdirectory
 ln -fs /current_config/work $targetdirectory
 
-#starting tpeap service
-chmod 770 /opt/tplink/EAPController/bin/control.sh
-/opt/tplink/EAPController/bin/control.sh start
-tail -f /dev/null
 EOF
-chmod 777 /opt/tplink/EAPController/bin/control.sh
-chmod 777 /opt/tplink/stroopwafel/docker_entrypoint.sh
-chmod -R 777 /opt/tplink/EAPController
+exec runuser -u tplink "$@"
