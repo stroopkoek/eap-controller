@@ -41,5 +41,6 @@ ln -fs /current_config/logs $targetdirectory
 ln -fs /current_config/properties $targetdirectory
 ln -fs /current_config/work $targetdirectory
 
-EOF
+#run CMD of Dockerfile
 exec runuser -u tplink "$@"
+EOF
