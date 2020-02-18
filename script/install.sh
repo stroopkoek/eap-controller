@@ -28,7 +28,7 @@ else
          ${targetdirectory}/properties \
          ${targetdirectory}/work
 fi
-
+chown -R tplink:tplink /var/run/tplink/
 chown -R tplink:tplink /current_config
 chown -R tplink:tplink $targetdirectory
 chmod -R 775 /current_config
