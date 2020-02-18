@@ -41,10 +41,12 @@ The ports are _all_ important! Removing one of them and the EAP-controller will 
 ## Other flags
 ```
 -v /path/to/your/config:/current_config #external:internalcontainer
-   It's only necessary to change /path/to/your/config to a place where the container can store it's files. For example /mnt/mass_storage/eap-controller:/current_config
+   It's only necessary to change /path/to/your/config to a place where the container can store it's files.
+   For example /mnt/mass_storage/eap-controller:/current_config
 -d Run container in background and print container ID
 ```
 
 ## Versions
-
-18-02-2020: Initial release with EAP Controller v3.2.6
+| Date | Tag | Description |
+| --- | --- | ---|
+| 18-02-2020 | 1.0 | Initial release with EAP Controller v3.2.6 |
