@@ -29,6 +29,9 @@ RUN chmod +x ./install.sh && yes | ./install.sh && rm -rf /tmp/b && \
 COPY ./script/install.sh /opt/tplink/stroopwafel
 COPY ./script/control.sh /opt/tplink/EAPController/bin
 
+#prepare control.sh for rootless access
+sed -i 's/-root/-tplink/' /opt/tplink/EAPController/bin/control.sh
+sed -i 's/\<check_root_perms\>/#check_root_perms/' /opt/tplink/EAPController/bin/control.sh
 
 #real build
 FROM ubuntu:bionic

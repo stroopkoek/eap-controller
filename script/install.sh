@@ -28,6 +28,7 @@ else
          ${targetdirectory}/properties \
          ${targetdirectory}/work
 fi
+#prepare environment for tplink user
 mkdir -p /var/run/tplink
 chown -R tplink:tplink /var/run/tplink
 chown -R tplink:tplink /current_config
