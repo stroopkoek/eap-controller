@@ -44,7 +44,8 @@ RUN mkdir -p /opt/tplink \
 
 COPY --from=buildmonkey /opt/tplink /opt/tplink
 
-RUN chmod +x /opt/tplink/stroopwafel/install.sh && /opt/tplink/stroopwafel/install.sh && rm /opt/tplink/stroopwafel/install.sh
+RUN chmod +x /opt/tplink/stroopwafel/install.sh && /opt/tplink/stroopwafel/install.sh && rm /opt/tplink/stroopwafel/install.sh && \
+    useradd -U -d /opt/tplink tplink
 
 EXPOSE 8088 8043 27001/udp 27002 29810/udp 29811 29812 29813
 ENTRYPOINT ["/bin/bash", "/opt/tplink/stroopwafel/docker_entrypoint.sh"]
