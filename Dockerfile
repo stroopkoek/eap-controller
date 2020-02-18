@@ -18,20 +18,16 @@ RUN wget -O - https://static.tp-link.com/2020/202001/20200116/Omada_Controller_v
 WORKDIR /tmp/b/c
 
 RUN chmod +x ./install.sh && yes | ./install.sh && rm -rf /tmp/b && \
-   rm -f /opt/tplink/EAPController/data/db/journal/prealloc.0 \
-         /opt/tplink/EAPController/data/db/journal/prealloc.1 \
-         /opt/tplink/EAPController/data/db/journal/prealloc.2 \
-         /opt/tplink/EAPController/data/db/journal/j._0
+    rm -f /opt/tplink/EAPController/data/db/journal/prealloc.0 \
+          /opt/tplink/EAPController/data/db/journal/prealloc.1 \
+          /opt/tplink/EAPController/data/db/journal/prealloc.2 \
+          /opt/tplink/EAPController/data/db/journal/j._0 && \
+   #prepare control.sh for rootless access
+   sed -i 's/-root/-tplink/' /opt/tplink/EAPController/bin/control.sh && \
+   sed -i 's/\<check_root_perms\>/#check_root_perms/' /opt/tplink/EAPController/bin/control.sh
 
-#copyjob of two scripts
-#install.sh makes the docker_entrypoint script
-#control.sh removes the original and replaces it with this prepared one
 COPY ./script/install.sh /opt/tplink/stroopwafel
-COPY ./script/control.sh /opt/tplink/EAPController/bin
-
-#prepare control.sh for rootless access
-sed -i 's/-root/-tplink/' /opt/tplink/EAPController/bin/control.sh
-sed -i 's/\<check_root_perms\>/#check_root_perms/' /opt/tplink/EAPController/bin/control.sh
+#COPY ./script/control.sh /opt/tplink/EAPController/bin
 
 #real build
 FROM ubuntu:bionic
