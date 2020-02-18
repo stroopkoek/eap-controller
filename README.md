@@ -14,10 +14,6 @@ Only x86-64 is supported at this time. I do have plans for an ARM version, but t
 ## Usage
 I advise you to use the docker-compose.yml file to run EAP-controller. It will make your life easier. ;)
 
-```
-useradd -u -M -r -s /bin/false tplink
-usermod -L tplink
-```
 ### Docker compose
 Also available as file in the repository.
 ```
@@ -40,6 +36,7 @@ services:
       - 29813:29813
     restart: unless-stopped
 ```
+
 ### Docker run
 ```
 docker run -p 8088:8088 -p 8043:8043 -p 27001:27001/udp \
