@@ -27,7 +27,7 @@ JAVA_TOOL="${JRE_HOME}/bin/java"
 JAVA_OPTS="-server -Xms128m -Xmx1024m -XX:MaxHeapFreeRatio=60 -XX:MinHeapFreeRatio=30  -XX:+HeapDumpOnOutOfMemoryError -Deap.home=${OMADA_HOME}"
 MAIN_CLASS="com.tp_link.eap.start.EapLinuxMain"
 #changed
-OMADA_USER=${OMADA_USER:tplink}
+OMADA_USER=${OMADA_USER:-tplink}
 OMADA_GROUP=$(id -gn ${OMADA_USER})
 
 PID_FILE="/var/run/tplink/${NAME}.pid"
