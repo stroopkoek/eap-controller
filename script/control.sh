@@ -267,3 +267,5 @@ elif [ $1 == "stop" ]; then
 elif [ $1 == "status" ]; then
     status
 fi
+
+tail -f /dev/null
