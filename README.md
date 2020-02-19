@@ -1,6 +1,6 @@
-![Docker Pulls](https://img.shields.io/docker/pulls/stroopwafel/eap-controller?style=for-the-badge)
-![Docker Stars](https://img.shields.io/docker/stars/stroopwafel/eap-controller?style=for-the-badge)
-![GitHub issues](https://img.shields.io/github/issues/stroopkoek/eap-controller?style=for-the-badge)
+[![Docker Pulls](https://img.shields.io/docker/pulls/stroopwafel/eap-controller?style=for-the-badge)](https://hub.docker.com/r/stroopwafel/eap-controller)
+[![Docker Stars](https://img.shields.io/docker/stars/stroopwafel/eap-controller?style=for-the-badge)](https://hub.docker.com/r/stroopwafel/eap-controller)
+[![GitHub issues](https://img.shields.io/github/issues/stroopkoek/eap-controller?style=for-the-badge)](https://github.com/stroopkoek/eap-controller)
 # eap-controller
 ## Supported Architecture & Tags
 
@@ -43,7 +43,7 @@ docker run -p 8088:8088 -p 8043:8043 -p 27001:27001/udp \
 -p 27002:27002 -p 29810:29810/udp -p 29811:29811 -p 29812:29812 \
 -p 29813:29813 -v /path/to/your/config:/current_config \
 --name=eapcontroller \
--d stroopwafel/eap-controller:1.0
+-d stroopwafel/eap-controller:latest
 ```
 
 ## Ports explanation
