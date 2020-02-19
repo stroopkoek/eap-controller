@@ -26,7 +26,8 @@ else
          ${targetdirectory}/keystore \
          ${targetdirectory}/logs \
          ${targetdirectory}/properties \
-         ${targetdirectory}/work
+         ${targetdirectory}/work \
+         /var/run/tplink/omada.pid
 fi
 #prepare environment for tplink user
 mkdir -p /var/run/tplink
