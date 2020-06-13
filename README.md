@@ -69,4 +69,5 @@ The ports are _all_ important! Removing one of them and the EAP-controller will 
 ## Versions
 | Date | Tag | Description |
 | --- | --- | ---|
-| 18-02-2020 | 1.0 | Initial release with EAP Controller v3.2.6 |
+| 13-06-2020 | 1.02 | EAP Controller v3.2.10 |
+| 18-02-2020 | 1.01 | Initial release with EAP Controller v3.2.6 |
