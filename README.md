@@ -11,7 +11,7 @@ Only x86-64 is supported at this time. I do have plans for an ARM version, but t
 | latest | Latest version of EAP Controller |
 | 1.0 | Use version tags to stay at a certain release |
 
-##Before upgrading to 4.1.5
+## Before upgrading to 4.1.5
 [Upgrade Instructions](https://www.tp-link.com/en/omada-sdn/controller-upgrade)
 tl:dr Backup your configuration and import it, after upgrading.
 
