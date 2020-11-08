@@ -1,7 +1,7 @@
 [![Docker Pulls](https://img.shields.io/docker/pulls/stroopwafel/eap-controller?style=for-the-badge)](https://hub.docker.com/r/stroopwafel/eap-controller)
 [![Docker Stars](https://img.shields.io/docker/stars/stroopwafel/eap-controller?style=for-the-badge)](https://hub.docker.com/r/stroopwafel/eap-controller)
 [![GitHub issues](https://img.shields.io/github/issues/stroopkoek/eap-controller?style=for-the-badge)](https://github.com/stroopkoek/eap-controller)
-# eap-controller
+# Omada Controller
 ## Supported Architecture & Tags
 
 Only x86-64 is supported at this time. I do have plans for an ARM version, but that will take some time.
@@ -69,5 +69,6 @@ The ports are _all_ important! Removing one of them and the EAP-controller will 
 ## Versions
 | Date | Tag | Description |
 | --- | --- | ---|
+| 08-11-2020 | 4.1.5 | EAP Controller v4.1.5 |
 | 13-06-2020 | 1.02 | EAP Controller v3.2.10 |
 | 18-02-2020 | 1.01 | Initial release with EAP Controller v3.2.6 |
