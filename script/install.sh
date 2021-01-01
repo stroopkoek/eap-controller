@@ -4,10 +4,11 @@ cat <<-'EOF' > /opt/tplink/stroopwafel/docker_entrypoint.sh
 #declaring variables
 targetdirectory=/opt/tplink/EAPController
 
+
 #if /current_config/bin/control.sh doesn't exist then
 #remove the current_config just in case and move the system folders to current_config
 #else echo for logging purposes that existing files are found!
-if ! [ -f /current_config/properties/eap.properties ]; then
+if ! [ -f /current_config/properties/omada.properties ]; then
   #remove current_config just in case; move the system folders to current_config
   #so that the link will work
 
@@ -43,7 +44,8 @@ ln -fs /current_config/keystore $targetdirectory
 ln -fs /current_config/logs $targetdirectory
 ln -fs /current_config/properties $targetdirectory
 ln -fs /current_config/work $targetdirectory
-ln -sf $(which mongod) /opt/tplink/EAPController/bin/mongod
+ln -fs $(which mongod) /opt/tplink/EAPController/bin/mongod
+
 
 #run CMD of Dockerfile
 exec runuser -u tplink "$@" start
