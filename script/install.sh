@@ -43,6 +43,7 @@ ln -fs /current_config/keystore $targetdirectory
 ln -fs /current_config/logs $targetdirectory
 ln -fs /current_config/properties $targetdirectory
 ln -fs /current_config/work $targetdirectory
+ln -sf $(which mongod) /opt/tplink/EAPController/bin/mongod
 
 #run CMD of Dockerfile
 exec runuser -u tplink "$@" start

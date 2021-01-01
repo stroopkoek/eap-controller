@@ -4,13 +4,13 @@ MAINTAINER stroopkoek/stroopwafel
 ENV DEBIAN_FRONTEND noninteractive
 
 #update and install required packages
-RUN apt -y update && apt -y install wget curl net-tools jsvc procps libcap2 libcap2-bin && \
+RUN apt -y update && apt -y install wget curl net-tools jsvc procps libcap2 libcap2-bin mongodb-server-core openjdk-8-jre-headless && \
     mkdir -p /tmp/b/c \
              /opt/tplink/stroopwafel
 
 WORKDIR /tmp/b
 
-RUN wget -O - https://static.tp-link.com/2020/202008/20200805/Omada_SDN_Controller_v4.1.5_linux_x64.tar.gz > c.tar.gz && tar -zxf c.tar.gz -C ./c --strip-components=1 && \
+RUN wget -O - https://static.tp-link.com/2020/202012/20201211/Omada_SDN_Controller_v4.2.8_linux_x64.tar.gz > c.tar.gz && tar -zxf c.tar.gz -C ./c --strip-components=1 && \
     rm -rf c.tar.gz
 
 WORKDIR /tmp/b/c
@@ -31,7 +31,7 @@ COPY ./script/install.sh /opt/tplink/stroopwafel
 #real build
 FROM ubuntu:bionic
 RUN apt -y update && \
-    apt -y install curl net-tools jsvc procps libcap2 libcap2-bin && \
+    apt -y install curl net-tools jsvc procps libcap2 libcap2-bin mongodb-server-core openjdk-8-jre-headless && \
     apt -y upgrade && \
     apt clean all && \
     rm -rf /var/cache/apt /var/lib/apt/lists /usr/share/doc && \
