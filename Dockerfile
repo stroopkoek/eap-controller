@@ -10,7 +10,7 @@ RUN apt -y update && apt -y install wget curl net-tools jsvc procps libcap2 libc
 
 WORKDIR /tmp/b
 
-RUN wget -O - https://static.tp-link.com/2020/202012/20201211/Omada_SDN_Controller_v4.2.8_linux_x64.tar.gz > c.tar.gz && tar -zxf c.tar.gz -C ./c --strip-components=1 && \
+RUN wget -O - https://static.tp-link.com/2021/202102/20210209/Omada_SDN_Controller_v4.2.11_linux_x64.tar.gz && tar -zxf c.tar.gz -C ./c --strip-components=1 && \
     rm -rf c.tar.gz
 
 WORKDIR /tmp/b/c
